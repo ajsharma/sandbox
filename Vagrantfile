@@ -90,7 +90,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # some recipes and/or roles.
   #
   config.vm.provision "chef_solo" do |chef|
-    # chef.cookbooks_path = "cookbooks"
+    chef.cookbooks_path = "cookbooks"
     # chef.roles_path = "chef/roles"
     # chef.data_bags_path = "chef/data_bags"
 
@@ -115,7 +115,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             #   ],
             # "languages" => "plpgsql",
             "locale" => "en_US.UTF8",
-            "name" => "app_development", # Rename this to your ruby 
+            "name" => "vagrant",
             "owner" => "vagrant",
             "template" => "template0"
             }
