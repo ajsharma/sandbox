@@ -98,8 +98,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "postgresql"
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
-    # chef.add_recipe "rvm::vagrant"
-    # chef.add_recipe "rvm::user"
+    chef.add_recipe "rvm::system"
+    chef.add_recipe "rvm::vagrant"
 
     # chef.add_role "web"
   
@@ -133,6 +133,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "version" => "9.3"
         },
       "rvm" => {
+        "default_ruby" => "ruby-2.0.0-p451",
+        "rubies" => [
+          "ruby-2.1.1"
+          ]
         }
       }
   end
