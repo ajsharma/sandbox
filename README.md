@@ -25,3 +25,11 @@ At this point, you should be able to create your own `Vagrantfile` and play with
 
 1. Run `vagrant ssh` to connect to the VM box
 1. Once connected, the synced folder for your rails app can be found in the `/vagrant`
+
+### Start with Rails
+
+Run inside the vm
+
+1. Run `cd /vagrant`
+1. Run `gem install rails --no-rdoc --no-ri --conservative`
+1. Run `rails new . --database=postgresql`
