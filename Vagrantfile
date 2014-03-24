@@ -61,8 +61,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # information on available options.
 
   config.vm.provision :shell, :path => "server/setup.sh"
-  # config.vm.provision :shell, :path => "server/install-rvm.sh",  :args => "stable"
-  # config.vm.provision :shell, :path => "server/install-rvm-ruby.sh", :args => "2.0.0-p195"  
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
