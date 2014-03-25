@@ -4,6 +4,9 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+# Use a custom name to allow simple app creation once the vagrant vm is up'ed
+APPLICATION_NAME = (File.basename(Dir.getwd).to_s || 'MyApplication').downcase
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -44,6 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder ".", "/#{APPLICATION_NAME}"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -94,7 +98,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.roles_path = "chef/roles"
     # chef.data_bags_path = "chef/data_bags"
 
-    chef.add_recipe "postgresql"
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
     chef.add_recipe "rvm::system"
@@ -108,6 +111,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "apt_distribution" => "precise", # Ubuntu 12.04
         "databases" => [
           {
+            # generic database to allow easy command line access to psql
+            "encoding" => "utf8",
+            "locale" => "en_US.UTF8",
+            "name" => "vagrant",
+            "owner" => "vagrant",
+            "template" => "template0"
+            },
+          {
+            # rails-esque database so `rails new` will work out of the box
             "encoding" => "utf8",
             # "extensions" => [
             #   "fuzzystrmatch",
@@ -115,7 +127,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             #   ],
             # "languages" => "plpgsql",
             "locale" => "en_US.UTF8",
-            "name" => "vagrant",
+            "name" => "#{APPLICATION_NAME}_development",
             "owner" => "vagrant",
             "template" => "template0"
             }
@@ -132,10 +144,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "version" => "9.3"
         },
       "rvm" => {
-        "default_ruby" => "ruby-2.0.0-p451",
+        "default_ruby" => "ruby-2.0.0-p451@#{APPLICATION_NAME}",
         "rubies" => [
           "ruby-2.1.1"
-          ]
+          ],
+        "rvmrc" => {
+          'rvm_project_rvmrc' => 1,
+          'rvm_gemset_create_on_use_flag' => 1,
+          'rvm_trust_rvmrcs_flag' => 1
+          }
         }
       }
   end
