@@ -41,6 +41,11 @@ _Perform the following for each new project you want to create in a new sandbox_
 1. Run `vagrant ssh` to connect to the VM box
 1. Once connected, the synced folder for your rails app can be found in the `/vagrant` _and_ in `/my_application_name`
 
+### Testing Successful Setup
+1. Run `rvm list gemsets` and you should see the installed rubies as well as a gemset for your application.
+1. Run `nodejs -v` and you should see a node install greater than 0.10
+1. Run `npm -v` and you should see a node install greater than 1.4
+
 ### Start with Rails
 
 Run inside the VM
@@ -51,3 +56,7 @@ Run inside the VM
 1. Sadly, there is one file edit required.  Open `/my_application_name/config/database.yml` and set your development username to `vagrant` and password to `password`. Note: you can edit your local _or_ the vm file as they are now synced.
 1. Run `rails s`
 1. Visit [http://localhost:3000/](http://localhost:3000/) in your browser!
+
+## Troubleshooting
+
+The most common (and only) problem that I've come across was download failures during the `vagrant up` process.  Running `vagrant destroy` and then `vagrant up` is the simplest way to attempt it again, but time consuming.  Running `vagrant provision` should hopefully fix it without as much time lost.
