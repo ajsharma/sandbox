@@ -6,6 +6,7 @@ Build a [Vagrant](http://www.vagrantup.com/) snapshot ready for Rails (or any ap
 ## In the Box
 
 An Ubuntu 12.04 x64 VM (aka 'precise') installed on your machine with:
+
 1. Git (latest from apt-get)
 2. NodeJS 0.6.12 which can be [easily updated](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 1. The latest stable [RVM](http://rvm.io/) release
