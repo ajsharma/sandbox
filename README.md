@@ -3,9 +3,11 @@ vagrancy
 
 Build a [Vagrant](http://www.vagrantup.com/) snapshot ready for Rails (or any application) development.
 
-## What You'll Get
+## In the Box
 
-An Ubuntu 12.04 x64 VM installed on your machine with:
+An Ubuntu 12.04 x64 VM (aka 'precise') installed on your machine with:
+1. Git (latest from apt-get)
+2. NodeJS 0.6.12 which can be [easily updated](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 1. The latest stable [RVM](http://rvm.io/) release
 1. A ruby 2.0.0 gemset named after your application and set to the default
 1. Postgresql 9.3 with development database created for the `vagrant` user
@@ -22,7 +24,7 @@ _Perform the following once per development machine_
 1. Install [VirtualBox](https://www.virtualbox.org/) from dmg
 1. Install [Vagrant](http://www.vagrantup.com/) from pkg
 
-At this point, you could create your own `Vagrantfile` and play with Vagrant if you want. However, follow the instructions below to setup an Ubuntu 12.04 (aka 'precise') vm ready for rails app development.
+At this point, you could create your own `Vagrantfile` and play with Vagrant if you want. However, follow the instructions below to complete the setup of the box.
 
 ### Preparing the Vagrant VM
 
