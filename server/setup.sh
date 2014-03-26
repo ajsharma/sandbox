@@ -5,6 +5,13 @@
 ####
 
 ###
+# Set correct locale
+###
+echo "Setting locale"
+locale-gen en_US.UTF-8
+update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+###
 # Update apt-get
 ###
 echo "Updating apt-get"
