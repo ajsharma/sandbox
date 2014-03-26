@@ -99,6 +99,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.roles_path = "chef/roles"
     # chef.data_bags_path = "chef/data_bags"
 
+    chef.add_recipe "postgresql::contrib" # before server b/c server creates the dbs
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
     chef.add_recipe "rvm::system"
@@ -122,13 +123,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           {
             # rails-esque database so `rails new` will work out of the box
             "encoding" => "utf8",
-            # "extensions" => [
-            #   "fuzzystrmatch",
-            #   "pg_trgm"
-            #   ],
-            # "languages" => "plpgsql",
             "locale" => "en_US.UTF8",
             "name" => "#{APPLICATION_NAME}_development",
+            "owner" => "vagrant",
+            "template" => "template0"
+            },
+          {
+            # rails-esque database so `rake test` will work out of the box
+            "encoding" => "utf8",
+            "locale" => "en_US.UTF8",
+            "name" => "#{APPLICATION_NAME}_test",
             "owner" => "vagrant",
             "template" => "template0"
             }
