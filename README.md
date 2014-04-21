@@ -57,6 +57,16 @@ Run inside the VM
 1. Run `rails s`
 1. Visit [http://localhost:3000/](http://localhost:3000/) in your browser!
 
+## Classic Next Steps
+
+### Set up your git credentials
+
+```bash
+git config --global color.ui auto
+git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
+
 ## Troubleshooting
 
 The most common (and only) problem that I've come across was download failures during the `vagrant up` process.  Running `vagrant destroy` and then `vagrant up` is the simplest way to attempt it again, but time consuming.  Running `vagrant provision` should hopefully fix it without as much time lost.
