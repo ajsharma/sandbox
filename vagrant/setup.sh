@@ -12,6 +12,13 @@ locale-gen en_US.UTF-8
 update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 ###
+# Set the time zone
+###
+echo "Setting timezone to UTC"
+echo "Etc/UTC" | sudo tee /etc/timezone
+dpkg-reconfigure --frontend noninteractive tzdata
+
+###
 # Update apt-get
 ###
 echo "Updating apt-get"
@@ -20,7 +27,16 @@ apt-get -qq update
 echo "Installing libraries from apt-get"
 apt-get -qq install curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev git-core libpq-dev
 
-### 
+###
+# Install latest git
+###
+echo "Installing/updating git"
+apt-get -qq install python-software-properties
+add-apt-repository ppa:git-core/ppa
+apt-get -qq update
+apt-get -qq install git
+
+###
 # Install basic ruby for chef
 # Releases can be found at http://ftp.ruby-lang.org/pub/ruby/2.0/
 ###
