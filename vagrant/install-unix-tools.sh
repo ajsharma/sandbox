@@ -10,7 +10,7 @@
 ###
 
 echo "Installing Vim..."
-apt-get -qq install vim
+apt-get -qy install vim
 
 echo "Set Vim as default Git editor"
 git config --global core.editor "vim"
@@ -20,7 +20,7 @@ git config --global core.editor "vim"
 ###
 
 echo "Installing screen and tmux"
-apt-get -qq install screen tmux
+apt-get -qy install screen tmux
 
 
 ###
@@ -28,11 +28,11 @@ apt-get -qq install screen tmux
 ###
 
 echo "Installing ack..."
-apt-get -qq install ack
+apt-get -qy install ack
 
 echo "Installing tig..."
-apt-get -qq install tig
+apt-get -qy install tig
 
 
 echo "Installling htop..."
-apt-get -qq install htop
+apt-get -qy install htop
