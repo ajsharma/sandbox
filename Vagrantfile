@@ -13,12 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "#{APPLICATION_NAME}-precise64"
+  config.vm.box = "ubuntu/trusty64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://domain.com/path/to/above.box"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -41,15 +40,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default value: false
   config.ssh.forward_agent = true
 
+  # X11 forwarding over SSH connections is enabled. Defaults to false.
+  config.ssh.forward_x11 = true
+
   # custom fix for "stdin: is not a tty" error (https://github.com/mitchellh/vagrant/issues/1673)
-  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  # config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder ".", "/#{APPLICATION_NAME}", type: "nfs"
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -67,9 +69,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # information on available options.
 
   config.vm.provision :shell, :path => "vagrant/setup.sh"
-  config.vm.provision :shell, :path => "vagrant/install-unix-tools.sh"
-  config.vm.provision :shell, :path => "vagrant/install-nodejs.sh"
-  config.vm.provision :shell, :path => "vagrant/install-firefox.sh"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
@@ -103,6 +102,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.roles_path = "chef/roles"
     # chef.data_bags_path = "chef/data_bags"
 
+    chef.add_recipe "nodejs"
     chef.add_recipe "postgresql::contrib" # before server b/c server creates the dbs
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
@@ -113,8 +113,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # You may also specify custom JSON attributes:
     chef.json = {
+      "nodejs" => {
+        },
       "postgresql" => {
-        "apt_distribution" => "precise", # Ubuntu 12.04
+        "apt_distribution" => "trusty", # Ubuntu 14.04
         "databases" => [
           {
             # generic database to allow easy command line access to psql
@@ -166,6 +168,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       }
   end
+
+  config.vm.provision :shell, :path => "vagrant/install-unix-tools.sh"
+  config.vm.provision :shell, :path => "vagrant/install-heroku-toolbelt.sh"
+  config.vm.provision :shell, :path => "vagrant/install-firefox.sh"
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).

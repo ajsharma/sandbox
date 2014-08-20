@@ -7,9 +7,12 @@ site 'http://community.opscode.com/api/v1'
 
 # cookbook 'apache2', '>= 1.0.0'
 
+cookbook 'nodejs',
+  :git => 'https://github.com/mdxp/nodejs-cookbook'
+
 cookbook 'postgresql',
   :git => 'https://github.com/phlipper/chef-postgresql'
 
 cookbook 'rvm',
-  :git => 'https://github.com/fnichol/chef-rvm', 
+  :git => 'https://github.com/fnichol/chef-rvm',
   :ref => 'v0.9.0'

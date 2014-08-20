@@ -5,4 +5,4 @@
 ####
 
 echo "Installing firefox"
-apt-get -qq install firefox
+apt-get -qy install firefox
