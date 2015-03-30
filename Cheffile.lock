@@ -8,11 +8,18 @@ SITE
       yum (~> 3.0)
 
 GIT
-  remote: https://github.com/fnichol/chef-rvm
-  ref: v0.9.0
-  sha: 4a408e5d6c5a52c37388a799c516430263339849
+  remote: https://github.com/ajsharma/chef-rbenv
+  ref: v0.7.2
+  sha: 742fddf62e21fcc3c7cf0af4c470dc516596538f
   specs:
-    rvm (0.9.0)
+    rbenv (0.7.2)
+
+GIT
+  remote: https://github.com/fnichol/chef-ruby_build
+  ref: v0.8.0
+  sha: ed2d3841784ecf60c1de808946307b588efe644f
+  specs:
+    ruby_build (0.8.0)
 
 GIT
   remote: https://github.com/mdxp/nodejs-cookbook
@@ -35,4 +42,6 @@ GIT
 DEPENDENCIES
   nodejs (>= 0)
   postgresql (>= 0)
-  rvm (>= 0)
+  rbenv (>= 0)
+  ruby_build (>= 0)
+

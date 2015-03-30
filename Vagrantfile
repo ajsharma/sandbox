@@ -118,6 +118,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
+
+  # Install the latest version of Chef
+  config.omnibus.chef_version = :latest
+
   config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "cookbooks"
     # chef.roles_path = "chef/roles"
@@ -127,8 +131,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "postgresql::contrib" # before server b/c server creates the dbs
     chef.add_recipe "postgresql::server"
     chef.add_recipe "postgresql::client"
-    chef.add_recipe "rvm::system"
-    chef.add_recipe "rvm::vagrant"
+    chef.add_recipe "ruby_build"
+    chef.add_recipe "rbenv::system"
+    chef.add_recipe "rbenv::user"
+    chef.add_recipe "rbenv::vagrant"
 
     # chef.add_role "web"
 
@@ -175,17 +181,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           ],
         "version" => "9.3"
         },
-      "rvm" => {
-        "default_ruby" => "ruby-2.1.2@#{APPLICATION_NAME}",
+      "rbenv" => {
         "rubies" => [
-          "ruby-2.0.0-p481",
-          "ruby-2.1.2"
+          "2.1.5"
           ],
-        "rvmrc" => {
-          'rvm_project_rvmrc' => 1,
-          'rvm_gemset_create_on_use_flag' => 1,
-          'rvm_trust_rvmrcs_flag' => 1
-          }
+        "user_installs" => [
+          {
+            "user" => "vagrant",
+            "rubies" => [ "2.1.5" ],
+            "global" => "2.1.5",
+            "gems" => {
+              "2.1.5" => [
+                # { "name" => "bundler" }
+                ]
+              }
+            }
+          ]
         }
       }
   end
