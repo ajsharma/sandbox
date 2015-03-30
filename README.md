@@ -24,6 +24,18 @@ _Perform the following once per development machine_
 
 1. Install [VirtualBox](https://www.virtualbox.org/) from dmg
 1. Install [Vagrant](http://www.vagrantup.com/) from pkg
+1. Install the [Vagrant Omnibus plugin](https://github.com/chef/vagrant-omnibus) plugin
+
+```sh
+vagrant plugin install vagrant-omnibus
+```
+
+1. Install the [Vagrant Librarian Chef plugin](https://github.com/jimmycuadra/vagrant-librarian-chef)
+
+```sh
+vagrant plugin install vagrant-librarian-chef
+```
+
 
 At this point, you could create your own `Vagrantfile` and play with Vagrant if you want. However, follow the instructions below to complete the setup of the box.
 

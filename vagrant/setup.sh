@@ -35,33 +35,3 @@ apt-get -qy install python-software-properties
 add-apt-repository ppa:git-core/ppa
 apt-get -qy update
 apt-get -qy install git
-
-###
-# Install basic ruby for chef
-# Releases can be found at http://ftp.ruby-lang.org/pub/ruby/2.0/
-###
-RUBY_RELEASE=ruby-2.0.0-p481
-echo "Installing ${RUBY_RELEASE} for chef"
-
-cd /tmp
-wget http://ftp.ruby-lang.org/pub/ruby/2.0/${RUBY_RELEASE}.tar.gz
-tar -xvzf ${RUBY_RELEASE}.tar.gz
-cd ${RUBY_RELEASE}/
-./configure --prefix=/usr/local
-make
-make install
-
-###
-# Install chef-solo
-###
-echo "Installing chef & librarian"
-cd /vagrant
-gem install chef librarian-chef --no-rdoc --no-ri --conservative
-# chef is now installed as `chef-solo`
-
-###
-# Download cookbooks for chef
-###
-echo "Installing cookbooks"
-cd /vagrant
-librarian-chef install
