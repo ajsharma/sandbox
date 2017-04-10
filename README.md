@@ -5,13 +5,12 @@ Build a [Vagrant](http://www.vagrantup.com/) snapshot ready for Rails (or any ap
 
 ## In the Box
 
-An Ubuntu 12.04 x64 VM (aka 'precise') installed on your machine with:
+An Ubuntu Trusty installed on your machine with:
 
 1. Git (latest from apt-get)
-2. NodeJS 0.6.12 which can be [easily updated](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
-1. The latest stable [RVM](http://rvm.io/) release
-1. A ruby 2.0.0 gemset named after your application and set to the default
-1. Postgresql 9.3 with development database created for the `vagrant` user
+2. NodeJS which can be [easily updated](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+1. The latest stable ruby release
+1. Postgresql 9.6 with development database created for the `vagrant` user
 1. A blank slate for creating new applications without the worries of destroying your own machine
 
 Note, this VM was put together with easy and rapid development in mind, so avoid using it in production.
@@ -30,13 +29,6 @@ _Perform the following once per development machine_
 vagrant plugin install vagrant-omnibus
 ```
 
-1. Install the [Vagrant Librarian Chef plugin](https://github.com/jimmycuadra/vagrant-librarian-chef)
-
-```sh
-vagrant plugin install vagrant-librarian-chef
-```
-
-
 At this point, you could create your own `Vagrantfile` and play with Vagrant if you want. However, follow the instructions below to complete the setup of the box.
 
 ### Preparing the Vagrant VM
@@ -52,11 +44,6 @@ _Perform the following for each new project you want to create in a new sandbox_
 
 1. Run `vagrant ssh` to connect to the VM box
 1. Once connected, the synced folder for your rails app can be found in the `/vagrant` _and_ in `/my_application_name`
-
-### Testing Successful Setup
-1. Run `rvm list gemsets` and you should see the installed rubies as well as a gemset for your application.
-1. Run `nodejs -v` and you should see a node install greater than 0.10
-1. Run `npm -v` and you should see a node install greater than 1.4
 
 ### Start with Rails
 
