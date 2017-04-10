@@ -30,9 +30,5 @@ apt-get -qy install screen tmux
 echo "Installing ack..."
 apt-get -qy install ack
 
-echo "Installing tig..."
-apt-get -qy install tig
-
-
 echo "Installling htop..."
 apt-get -qy install htop
