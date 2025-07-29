@@ -1,5 +1,9 @@
-vagrancy
+README
 ========
+
+This git repo is used to create a quick sandbox environment on my local computer so I can quickly script up prototypes.
+
+# If you want to use Vagrant
 
 Build a [Vagrant](http://www.vagrantup.com/) snapshot ready for Rails (or any application) development.
 

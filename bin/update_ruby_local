@@ -1,0 +1,49 @@
+#!/bin/bash
+# Get the latest version of ruby and set .ruby-version to match
+
+set -euo pipefail
+
+echo "Updating rbenv and ruby-build..."
+current_dir=$(pwd)
+if [ -d "$HOME/.rbenv/.git" ]; then
+  cd "$HOME/.rbenv" && git pull
+fi
+if [ -d "$HOME/.rbenv/plugins/ruby-build/.git" ]; then
+  cd "$HOME/.rbenv/plugins/ruby-build" && git pull
+fi
+cd "$current_dir"
+
+echo "Fetching latest stable Ruby version..."
+latest_ruby=$(rbenv install --list | grep -E "^\s*[0-9]+\.[0-9]+\.[0-9]+$" | tail -1 | tr -d ' ')
+
+if [ -z "$latest_ruby" ]; then
+  echo "Error: Could not determine latest Ruby version"
+  exit 1
+fi
+
+echo "Latest stable Ruby version: $latest_ruby"
+
+if [ -f .ruby-version ]; then
+  current_version=$(cat .ruby-version)
+  echo "Current .ruby-version: $current_version"
+  
+  if [ "$current_version" = "$latest_ruby" ]; then
+    echo "Already using the latest version!"
+    exit 0
+  fi
+fi
+
+echo "Installing Ruby $latest_ruby..."
+rbenv install --skip-existing "$latest_ruby"
+
+echo "Updating .ruby-version to $latest_ruby..."
+echo "$latest_ruby" > .ruby-version
+
+echo "Setting global Ruby version..."
+rbenv global "$latest_ruby"
+
+echo "Rehashing rbenv..."
+rbenv rehash
+
+echo "Ruby version updated successfully!"
+ruby --version
